@@ -39,7 +39,7 @@ jobs:
       - name: Move NO OTA binaries
         run: |
           mv ./firmware/build-noota/*.bin ./firmware/build-noota/
-          mv ./firmware/build-noota/*/bootloader.bin ./firmware/build-noota/
+          mv ./firmware/build-noota/*/*.bin ./firmware/build-noota/
 
       - name: esp-idf build OTA
         uses: espressif/esp-idf-ci-action@v1
