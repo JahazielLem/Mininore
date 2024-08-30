@@ -34,12 +34,12 @@ jobs:
           command: "idf.py @profiles/noota build"
       
       - name: Create NO OTA folder
-        run: mkdir -p ./firmware/build-noota
+        run: mkdir -p ./firmware/build-noota-release
 
       - name: Move NO OTA binaries
         run: |
-          mv ./firmware/build-noota/*.bin ./firmware/build-noota/
-          mv ./firmware/build-noota/*/*.bin ./firmware/build-noota/
+          mv ./firmware/build-noota/*.bin ./firmware/build-noota-release/
+          mv ./firmware/build-noota/*/*.bin ./firmware/build-noota-release/
 
       - name: esp-idf build OTA
         uses: espressif/esp-idf-ci-action@v1
@@ -50,18 +50,18 @@ jobs:
           command: "idf.py @profiles/ota build"
 
       - name: Create OTA folder
-        run: mkdir -p ./firmware/build-ota
+        run: mkdir -p ./firmware/build-ota-release
 
       - name: Move OTA binaries
         run: |
-          mv ./firmware/build-ota/*.bin ./firmware/build-ota/
-          mv ./firmware/build-ota/*/*.bin ./firmware/build-ota/
+          mv ./firmware/build-ota/*.bin ./firmware/build-ota-release/
+          mv ./firmware/build-ota/*/*.bin ./firmware/build-ota-release/
 
       - name: Zip NO OTA Folder
-        run: zip -r ./firmware/minino-noota-firmware.zip ./firmware/build-noota/
+        run: zip -r ./firmware/minino-noota-firmware.zip ./firmware/build-noota-release/
 
       - name: Zip OTA Folder
-        run: zip -r ./firmware/minino-ota-firmware.zip ./firmware/build-ota/
+        run: zip -r ./firmware/minino-ota-firmware.zip ./firmware/build-ota-release/
 
       - name: Archive Firmware NO OTA ZIP
         uses: actions/upload-artifact@v4
