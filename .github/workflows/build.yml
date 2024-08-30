@@ -38,9 +38,8 @@ jobs:
 
       - name: Move NO OTA binaries
         run: |
-          mv ./firmware/build-noota/minino.bin ./firmware/build-noota/
-          mv ./firmware/build-noota/bootloader/bootloader.bin ./firmware/build-noota/
-          mv ./firmware/build-noota/partitions/partitions.bin ./firmware/build-noota/
+          mv ./firmware/build-noota/*.bin ./firmware/build-noota/
+          mv ./firmware/build-noota/*/*.bin ./firmware/build-noota/
 
       - name: esp-idf build OTA
         uses: espressif/esp-idf-ci-action@v1
@@ -55,9 +54,8 @@ jobs:
 
       - name: Move OTA binaries
         run: |
-          mv ./firmware/build-ota/minino.bin ./firmware/build-ota/
-          mv ./firmware/build-ota/bootloader/bootloader.bin ./firmware/build-ota/
-          mv ./firmware/build-ota/partitions/partitions.bin ./firmware/build-ota/
+          mv ./firmware/build-ota/*.bin ./firmware/build-ota/
+          mv ./firmware/build-ota/*/*.bin ./firmware/build-ota/
 
       - name: Zip NO OTA Folder
         run: zip -r ./firmware/minino-noota-firmware.zip ./firmware/build-noota/
