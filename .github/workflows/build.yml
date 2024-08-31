@@ -24,6 +24,17 @@ jobs:
   
       - name: Add version
         run: git describe --tags | sed 's/-[^-]*$//' > version.txt
+      
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Display version
+        run: |
+          echo $RELEASE_VERSION
+      
+      - name: Rename OTA Version sdkconfig
+        run: |
+          sed -i "s/CONFIG_PROJECT_VERSION=\".*\"/CONFIG_PROJECT_VERSION=\"$RELEASE_VERSION\"/g" ./firmware/sdkconfig.ota
+          sed -i "s/CONFIG_PROJECT_VERSION=\".*\"/CONFIG_PROJECT_VERSION=\"$RELEASE_VERSION\"/g" ./firmware/sdkconfig.noota
   
       - name: esp-idf build NO OTA
         uses: espressif/esp-idf-ci-action@v1
